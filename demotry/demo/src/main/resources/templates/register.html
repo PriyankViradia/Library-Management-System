@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Create New Account</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+<body>
+<!--<div th:insert="fragments/header :: header"></div>-->
+<div class="container my-5">
+  <h3>Create New Account</h3>
+  <div class="card">
+    <div class="card-body">
+      <div class="col-md-10">
+        <div th:if="${param.success}">
+          <div class="alert alert-info">You've successfully registered</div>
+        </div>
+        <div th:if="${param.fail}">
+          <div class="alert alert-danger">email already exists</div>
+        </div>
+
+        <form action="" th:action="@{/process}" th:object="${student}" method="post" name="registrationForm">
+
+          <div class="row">
+
+            <div class="form-group col-md-8">
+
+              <label for="firstName" class="col-form-label">Student Name</label>
+              <input type="text" th:field="*{firstName}" class="form-control" id="firstName" th:value="${student.firstName}" placeholder="Student First Name" required/>
+            </div>
+
+            <div class="form-group col-md-8">
+              <label for="lastName" class="col-form-label">Last Name </label>
+              <input type="text" th:field="*{lastName}" class="form-control" id="lastName" th:value="${student.lastName}" placeholder="Last Name" required/>
+            </div>
+
+            <div class="form-group col-md-8">
+              <label for="email" class="col-form-label">Email</label>
+              <input type="email" th:field="*{email}" class="form-control" id="email"  placeholder="Email" required />
+              <div th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}" id="validationServer03Feedback" class="invalid-feedback" ></div>
+            </div>
+            <div class="form-group col-md-8">
+              <label for="password" class="col-form-label">password</label>
+              <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Password" required />
+
+            </div>
+            <div class="form-group col-md-8">
+              <label for="Age" class="col-form-label">Age</label>
+              <input type="number" th:field="*{age}" class="form-control" id="Age" th:value="${student.age}" placeholder="age" required/>
+
+            </div>
+
+            <div class="col-md-6">
+              <button type="submit" class="btn btn-primary" >submit</button>
+              <span>Already register? <a href="/" th:href="@{/}">Login here</a> </span>
+            </div>
+          </div>
+        </form>
+      </div>
+<!--      <div th:each="e: ${fields.errors('email')}" th:text="${e}" id="validationServer03Feedback" class="invalid-feedback" ></div>-->
+    </div>
+  </div>
+</div>
+<!--<div th:insert="fragments/footer :: footer"></div>-->
+</body>
+
+</html>
